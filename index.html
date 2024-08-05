@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tracker Vault</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Book Tracker Vault</h1>
+        
+        <form id="book-form">
+            <h2>Agregar Nuevo Libro</h2>
+            <input type="text" id="title" placeholder="Título del libro" required>
+            <input type="text" id="author" placeholder="Autor" required>
+            <textarea id="notes" placeholder="Notas o comentarios"></textarea>
+            <select id="rating" required>
+                <option value="">Selecciona una puntuación</option>
+                <option value="1">1 estrella</option>
+                <option value="2">2 estrellas</option>
+                <option value="3">3 estrellas</option>
+                <option value="4">4 estrellas</option>
+                <option value="5">5 estrellas</option>
+            </select>
+            <input type="file" id="cover" accept="image/*">
+            <button type="submit">Agregar Libro</button>
+        </form>
+
+        <div id="books-list">
+            <h2>Libros Leídos</h2>
+            <!-- Los libros se insertarán aquí dinámicamente -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
