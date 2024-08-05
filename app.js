@@ -31,32 +31,36 @@ bookForm.addEventListener('submit', async (e) => {
         });
     }
 
-    const { data, error } = await supabase
-        .from('books')
-        .insert([
-            { title, author, notes, rating, cover_url: coverUrl }
-        ]);
+    try {
+        const { data, error } = await supabase
+            .from('books')
+            .insert([
+                { title, author, notes, rating, cover_url: coverUrl }
+            ]);
 
-    if (error) {
-        console.error('Error adding book:', error);
-    } else {
-        console.log('Book added successfully');
+        if (error) throw error;
+
+        console.log('Book added successfully', data);
         bookForm.reset();
-        loadBooks();
+        await loadBooks();
+    } catch (error) {
+        console.error('Error adding book:', error);
     }
 });
 
 // Función para cargar y mostrar los libros
 async function loadBooks() {
-    const { data, error } = await supabase
-        .from('books')
-        .select('*')
-        .order('created_at', { ascending: false });
+    try {
+        const { data, error } = await supabase
+            .from('books')
+            .select('*')
+            .order('created_at', { ascending: false });
 
-    if (error) {
-        console.error('Error loading books:', error);
-    } else {
+        if (error) throw error;
+
         displayBooks(data);
+    } catch (error) {
+        console.error('Error loading books:', error);
     }
 }
 
